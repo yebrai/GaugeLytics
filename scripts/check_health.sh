@@ -1,16 +1,16 @@
 #!/bin/bash
 
-# Define the URL to check
-URL=http://localhost:8080/health
+# Definir la URL del health check
+URL="${HEALTH_CHECK_URL:-http://localhost:8080/health}"
 
-# Make a request to the health check endpoint
-HTTP_RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" $URL)
+# Realizar la solicitud al endpoint de health-check
+response=$(curl --write-out "%{http_code}" --silent --output /dev/null "$URL")
 
-# Check if the response code is 200
-if [ "$HTTP_RESPONSE" -eq 200 ]; then
-  echo "Health-check passed: Service is up and running."
+# Verificar el código de estado HTTP
+if [ "$response" -eq 200 ]; then
+  echo "Health check passed."
   exit 0
 else
-  echo "Health-check failed: Service responded with status code $HTTP_RESPONSE."
+  echo "Health check failed with status code $response."
   exit 1
 fi
