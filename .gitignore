@@ -1,16 +1,34 @@
-# Binaries for programs and plugins
+# Go Build
+/bin/
+/pkg/
+/build/
+
+# Go Modules
+/go.sum
+/go.mod
+
+# Compiled binary
 *.exe
 *.exe~
 *.dll
 *.so
-*.dylib
 *.env
 
-# Test binary, build with `go test -c`
+
+# Test binary
 *.test
 
-# Output of the go coverage tool
+# Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 
-# IDE elements
-*.idea
+# IDE Specific
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db

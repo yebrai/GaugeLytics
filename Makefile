@@ -1,55 +1,51 @@
 # Variables
-APP_NAME = gaugelytics
-DOCKER_COMPOSE_FILE = docker-compose.yml
-ENV_FILE = .env
+SERVICES := health-service
+DOCKER_COMPOSE_FILE := docker-compose.yml
 
 # Default target
 .PHONY: all
-all: build run
+all: build test
 
-# Build the Go application
+# Build all services
 .PHONY: build
 build:
-	@echo "Building the Go application..."
-	@go build -o ./cmd/$(APP_NAME)/$(APP_NAME) ./cmd/$(APP_NAME)/main.go
+	@echo "Building all services..."
+	@for service in $(SERVICES); do \
+		docker-compose -f $(DOCKER_COMPOSE_FILE) build $$service ; \
+	done
 
-# Run the application using Docker Compose
-.PHONY: run
-run:
-	@echo "Running the application using Docker Compose..."
-	@docker-compose --env-file $(ENV_FILE) -f $(DOCKER_COMPOSE_FILE) up --build
-
-# Stop the application and remove containers
-.PHONY: stop
-stop:
-	@echo "Stopping and removing containers..."
-	@docker-compose --env-file $(ENV_FILE) -f $(DOCKER_COMPOSE_FILE) down
-
-# Run tests
+# Run tests for all services
 .PHONY: test
 test:
-	@echo "Running tests..."
-	@go test ./...
+	@echo "Running tests for all services..."
+	@go test ./test/...
+
+# Run a specific service
+.PHONY: run
+run:
+	@echo "Running all services..."
+	@docker-compose -f $(DOCKER_COMPOSE_FILE) up
+
+# Stop all services
+.PHONY: stop
+stop:
+	@echo "Stopping all services..."
+	@docker-compose -f $(DOCKER_COMPOSE_FILE) down
 
 # Clean up build files
 .PHONY: clean
 clean:
 	@echo "Cleaning up build files..."
-	@rm -f ./cmd/$(APP_NAME)/$(APP_NAME)
+	@for service in $(SERVICES); do \
+		rm -f ./services/$$service/bin/* ; \
+	done
 
-# Rebuild and rerun the application
-.PHONY: rebuild
-rebuild: clean build run
+# Deploy to production
+.PHONY: deploy
+deploy:
+	@echo "Deploying to production..."
 
-# Build Docker image
-.PHONY: docker-build
-docker-build:
-	@echo "Building Docker image..."
-	@docker build -t $(APP_NAME) .
-
-# Push Docker image to a registry (Modify for your own registry)
-.PHONY: docker-push
-docker-push:
-	@echo "Pushing Docker image to registry..."
-	@docker tag $(APP_NAME):latest your-registry/$(APP_NAME):latest
-	@docker push your-registry/$(APP_NAME):latest
+# Verify health-check endpoint
+verify-health:
+	@echo "Verifying health-check endpoint..."
+	scripts/check_health.sh

@@ -1,6 +1,7 @@
-version: '3'
+version: '3.8'
 services:
   health-service:
-    build: services/health-service
+    build:
+      context: ./services/health-service
     ports:
       - "8080:8080"
