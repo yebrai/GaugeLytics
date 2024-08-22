@@ -1,5 +1,5 @@
 # Variables
-SERVICES := health-service
+SERVICES := health-service user-service
 DOCKER_COMPOSE_FILE := docker-compose.yml
 
 # Default target
@@ -20,7 +20,7 @@ test:
 	@echo "Running tests for all services..."
 	@for service in $(SERVICES); do \
 		echo "Running tests for $$service..."; \
-		cd services/$$service && go test ./test/...; \
+		cd services/$$service && go test ./test/unit/... && go test ./test/integration/...; \
 		cd - >/dev/null; \
 	done
 
