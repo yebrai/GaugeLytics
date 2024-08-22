@@ -1,10 +1,10 @@
 package main
 
 import (
+	"gaugelytics-backend/services/health-service/internal/application"
 	"log"
 	"net/http"
 
-	"gaugelytics-backend/services/health-service/internal/service"
 	"github.com/gorilla/mux"
 )
 
@@ -13,7 +13,7 @@ func main() {
 	router := mux.NewRouter()
 
 	// Definir la ruta para el health check
-	router.HandleFunc("/health", service.HealthCheckHandler).Methods("GET")
+	router.HandleFunc("/health", application.HealthCheckHandler).Methods("GET")
 
 	log.Println("Starting server on :8080")
 	// Usar el enrutador con ListenAndServe

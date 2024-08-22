@@ -1,5 +1,5 @@
-// services/health-service/internal/service/health_service.go
-package service
+// services/health-service/internal/application/health_service.go
+package application
 
 import (
 	"encoding/json"

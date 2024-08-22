@@ -2,7 +2,7 @@ package unit
 
 import (
 	"encoding/json"
-	"gaugelytics-backend/services/health-service/internal/service"
+	"gaugelytics-backend/services/health-service/internal/application"
 	"github.com/gorilla/mux"
 	"net/http"
 	"net/http/httptest"
@@ -15,7 +15,7 @@ type HealthCheckResponse struct {
 
 func TestHealthCheckHandler(t *testing.T) {
 	r := mux.NewRouter()
-	r.HandleFunc("/health", service.HealthCheckHandler).Methods("GET")
+	r.HandleFunc("/health", application.HealthCheckHandler).Methods("GET")
 
 	req, err := http.NewRequest("GET", "/health", nil)
 	if err != nil {

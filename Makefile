@@ -18,7 +18,11 @@ build:
 .PHONY: test
 test:
 	@echo "Running tests for all services..."
-	@go test ./test/...
+	@for service in $(SERVICES); do \
+		echo "Running tests for $$service..."; \
+		cd services/$$service && go test ./test/...; \
+		cd - >/dev/null; \
+	done
 
 # Run a specific service
 .PHONY: run
