@@ -17,8 +17,8 @@ GaugeLytics-backend/
 │       ├── cmd/                    # Entry point for the service
 │       ├── internal/
 │       │   ├── application/        # Core application logic
-│       │   ├── infrastructure/     # Infrastructure-related code
 │       │   ├── domain/             # Domain models and business rules
+│       │   ├── infrastructure/     # Infrastructure-related code
 │       │   └── config/             # Configuration management
 │       ├── test/
 │       │   ├── integration/        # Integration tests
