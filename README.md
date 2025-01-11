@@ -13,21 +13,38 @@ GaugeLytics is an application designed for tracking and analyzing web and mobile
 ```plaintext
 GaugeLytics-backend/
 ├── services/
-│   └── services/
-│       ├── cmd/                    # Entry point for the service
+│   ├── health-service/
+│   │   ├── cmd/                      # Entry point for the service
+│   │   ├── internal/
+│   │   │   ├── application/          # Core application logic
+│   │   │   ├── domain/               # Domain models and business rules
+│   │   │   ├── infrastructure/       # Infrastructure-related code
+│   │   │   └── config/               # Configuration management
+│   │   ├── test/health-service/      # Tests for health service
+│   │   │   ├── integration/          # Integration tests
+│   │   │   └── unit/                 # Unit tests
+│   │   ├── Dockerfile                # Dockerfile for the health service
+│   │   ├── go.mod                    # Go module file
+│   │   └── go.sum                    # Go checksum file
+│   └── user-service/
+│       ├── cmd/                      # Entry point for the user service
 │       ├── internal/
-│       │   ├── application/        # Core application logic
-│       │   ├── domain/             # Domain models and business rules
-│       │   ├── infrastructure/     # Infrastructure-related code
-│       │   └── config/             # Configuration management
-│       ├── test/
-│       │   ├── integration/        # Integration tests
-│       │   └── unit/               # Unit tests
-│       └── Dockerfile              # Dockerfile for the service
-├── scripts/                        # Utility scripts for the project
-├── Dockerfile                      # Dockerfile for the overall application setup
-├── Makefile                        # Makefile with tasks for building, running, and testing services
-└── docker-compose.yml              # Docker Compose file for managing multi-container deployment
+│       │   ├── application/          # Core application logic
+│       │   ├── domain/               # Domain models and business rules
+│       │   ├── infrastructure/       # Infrastructure-related code
+│       │   ├── ports/                # Ports and adapters
+│       ├── test/user-service/        # Tests for user service
+│       │   ├── integration/          # Integration tests
+│       │   └── unit/                 # Unit tests
+│       ├── Dockerfile                # Dockerfile for the user service
+│       ├── go.mod                    # Go module file
+│       └── go.sum                    # Go checksum file
+├── scripts/                          # Utility scripts for the project
+├── Dockerfile                        # Dockerfile for the overall application setup
+├── Makefile                          # Makefile with tasks for building, running, and testing services
+├── .gitignore                        # Git ignore file
+├── README.md                         # Project documentation
+└── docker-compose.yml                # Docker Compose file for managing multi-container deployment
 ```
 ### Getting Started
 
