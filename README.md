@@ -13,12 +13,12 @@ GaugeLytics is an application designed for tracking and analyzing web and mobile
 ```plaintext
 GaugeLytics-backend/
 ├── services/
-│   └── service-name/
+│   └── services/
 │       ├── cmd/                    # Entry point for the service
 │       ├── internal/
-│       │   ├── domain/             # Domain models and business rules
+│       │   ├── application/        # Core application logic
 │       │   ├── infrastructure/     # Infrastructure-related code
-│       │   ├── service/            # Core application logic
+│       │   ├── domain/             # Domain models and business rules
 │       │   └── config/             # Configuration management
 │       ├── test/
 │       │   ├── integration/        # Integration tests
